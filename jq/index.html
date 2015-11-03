@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>jq版 todolist</title>
+	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="js/todolist.js"></script>
+	<style type="text/css">
+		body{
+			padding: 0;
+			margin: 0;
+			font-size: 16px;
+			background: #CDCDCD;
+		}
+		.m-todolist{
+			width: 600px;
+			margin: 20px auto 0;
+		}
+		.addList{
+			height: 50px;
+			text-align: center;
+			background: #333;
+			background: rgba(47,47,47,0.98);
+		}
+		.addList input{
+		    width: 60%;
+		    height: 24px;
+		    margin-top: 12px;
+		    text-indent: 10px;
+		    border-radius: 5px;
+		    box-shadow: 0 1px 0 rgba(255,255,255,0.24), 0 1px 6px rgba(0,0,0,0.45) inset;
+		    border: none;
+		}
+		h2{
+			position: relative;
+		}
+		h2 span{
+			position: absolute;
+			top: 2px;
+			right: 5px;
+			display: inline-block;
+			padding: 0 5px;
+			height: 20px;
+			border-radius: 20px;
+			background: #E6E6FA;
+			line-height: 22px;
+			text-align: center;
+			color: #666;
+			font-size: 14px;
+		}
+		ul,ol{
+			padding: 0;
+			margin: 0;
+			list-style: none;
+		}
+		.list li{
+		    line-height: 32px;
+		    background: #fff;
+		    position: relative;
+		    margin-bottom: 10px;
+		    padding: 0 45px;
+		    border-radius: 3px;
+		    border-left: 5px solid #629A9C;
+		    box-shadow: 0 1px 2px rgba(0,0,0,0.07);
+		}
+		.list input{
+			position: absolute;
+		    top: 2px;
+		    left: 10px;
+		    width: 22px;
+		    height: 22px;
+		    cursor: pointer;
+		}
+		.list p{
+			margin: 0;
+		}
+		.list a{
+			position: absolute;
+		    top: 2px;
+		    right: 5px;
+		    width: 14px;
+		    height: 12px;
+		    border-radius: 14px;
+		    border: 6px double #FFF;
+		    background: #CCC;
+		    line-height: 14px;
+		    text-align: center;
+		    color: #FFF;
+		    font-weight: bold;
+		    font-size: 14px;
+		    cursor: pointer;
+		}
+		ol.list li{
+			cursor: move;
+		}
+		ul.list li{
+			border-left: 5px solid #999;
+			opacity: 0.5;
+		}
+		.btns{
+			padding-top: 20px;
+			text-align: center;
+		}
+		.btns button{
+			display: none;
+		    padding: 6px 12px;
+		    margin-bottom: 0;
+		    font-size: 14px;
+		    font-weight: 400;
+		    line-height: 1.42857143;
+		    text-align: center;
+		    white-space: nowrap;
+		    vertical-align: middle;
+		    -ms-touch-action: manipulation;
+		    touch-action: manipulation;
+		    cursor: pointer;
+		    -webkit-user-select: none;
+		    -moz-user-select: none;
+		    -ms-user-select: none;
+		    user-select: none;
+		    background-image: none;
+		    border: 1px solid transparent;
+		    border-radius: 4px;
+		    color: #fff;
+		    background-color: #d9534f;
+		    border-color: #d43f3a;
+		}
+		.btns button:hover{
+			color: #fff;
+		    background-color: #c9302c;
+		    border-color: #ac2925;
+		}
+	</style>
+</head>
+<body>
+	<div class="m-todolist">
+		<div class="addList">
+			<form id="formData">
+				<input type="text" id="title" name="title" placeholder="添加ToDo" required="required" autocomplete="off">
+			</form>
+		</div>
+		<div class="listBox">
+			<h2>
+				正在进行
+				<span id="todocount">0</span>
+			</h2>
+			<ol id="todolist" class="list"></ol>
+			<h2>
+				已经完成
+				<span id="donecount">0</span>
+			</h2>
+			<ul id="donelist" class="list"></ul>
+		</div>
+		<div class="btns">
+			<button id="removeList">全部清空</button>
+		</div>
+	</div>
+</body>
+</html>
