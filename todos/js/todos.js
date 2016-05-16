@@ -28,7 +28,7 @@ $(function(){
 	function createData(data){
 		var str = '<li class="'+(data.done ? 'completed' : '')+'" data-uid="'+data.id+'">\
 		            <div class="view">\
-		                <input class="toggle" type="checkbox" '+(data.done ? 'checked="checked' : '')+'>\
+		                <input class="toggle" type="checkbox" '+(data.done ? 'checked="checked"' : '')+' />\
 		                <label>'+data.title+'</label>\
 		                <button class="destroy"></button>\
 		            </div>\
