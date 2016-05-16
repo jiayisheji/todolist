@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <div class="todoapp" id="todoapp">
+        <header class="header" >
+            <h1>todos</h1>
+            <form class="todo-form">
+                <input class="add-todo" placeholder="请输入内容" value="" required="required" autocomplete="off">
+            </form>
+        </header>
+        <main class="main">
+            <input class="toggle-all" type="checkbox">
+            <ul class="todo-list"></ul>
+        </main>
+        <footer class="footer">
+            <span class="todo-count">
+                <strong>0</strong>
+                <span>剩下的项目</span>
+            </span>
+            <button class="clear-completed">
+                <span>清除</span>
+                <strong>0</strong>
+                <span>完成项目</span>
+            </button>
+        </footer>
+    </div>
+    <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="js/todos.js"></script>
+</body>
+</html>
