@@ -9,14 +9,14 @@ $(function(){
 	var $clearcompleted = $todoapp.find('.clear-completed');
 
 	//全局数据列表
-	var todoData = loadData() || [];
+	var todoData = loadData();
 	//step2  实现添加功能
 	$todoform.on('submit',function(event){
 		event.preventDefault();
 		if(!!$.trim($addtodo.val())){
 			var todo = {"id":+new Date(),"title":$addtodo.val(),"done":false};
-			todoData.push(todo);
-			$todolist.append(createData(todo));
+			todoData.unshift(todo);
+			$todolist.prepend(createData(todo));
 			$addtodo.val('');
 			$toggleall.prop("disabled", false);
 			todoCount();
@@ -89,20 +89,17 @@ $(function(){
 		var completed = $todolist.find('li.completed').size();
 		$clearcompleted.html('<span>清除&nbsp;</span><strong>'+completed+'</strong><span>&nbsp;完成项目</span>');
 		$todocount.html('<strong>'+(todo - completed)+'</strong><span>&nbsp;剩下的项目</span>');
-		if(todo === 0 && completed === 0){
-			$toggleall.prop("checked", false);
-		}else{
-			$toggleall.prop("disabled", false);
-			$toggleall.prop("checked", completed === todo);
-		}
+		$toggleall.prop({"checked": !!completed && completed === todo,"disabled":!todo});
 		saveData(todoData);
 	}
 
 	//step7  清除选中的列表项
 	$todoapp.delegate('.clear-completed','click',function(event){
 		event.preventDefault(); //阻止默认事件，防止冒泡
-		$todolist.find('li.completed').remove();
-		todoCount();
+		if($todolist.find('li.completed').size()>0){
+			$todolist.find('li.completed').remove();
+			todoCount();
+		}
 	});
 
 	//step8  全部选中的列表项
