@@ -16,9 +16,10 @@ $(function(){
 		if(!!$.trim($addtodo.val())){
 			var todo = {"id":+new Date(),"title":$addtodo.val(),"done":false};
 			todoData.push(todo);
-			createData(todo);
+			$todolist.append(createData(todo));
 			$addtodo.val('');
 			$toggleall.prop("disabled", false);
+			todoCount();
 		}
 		return false;
 	});
@@ -26,16 +27,14 @@ $(function(){
 	//step3  实现列表中显示一条数据
 	// 数据格式  {"id":当前id放置冲突用时间戳代替,title":显示文字,"done":显示是否选中}
 	function createData(data){
-		var str = '<li class="'+(data.done ? 'completed' : '')+'" data-uid="'+data.id+'">\
+		return '<li class="'+(data.done ? 'completed' : '')+'" data-uid="'+data.id+'">\
 		            <div class="view">\
 		                <input class="toggle" type="checkbox" '+(data.done ? 'checked="checked"' : '')+' />\
 		                <label>'+data.title+'</label>\
 		                <button class="destroy"></button>\
 		            </div>\
 		            <input class="edit" value="'+data.title+'">\
-		        </li>'
-		$todolist.append(str);
-		todoCount();
+		        </li>';
 	};
 
 	//step4  实现列表中删除一条数据
@@ -131,9 +130,11 @@ $(function(){
 		localStorage.setItem("todo",JSON.stringify(data));
 	}
 	function createList(){
+		var str = '';
 		for (var i = 0,len = todoData.length; i < len; i++) {
-			createData(todoData[i]);
+			str += createData(todoData[i]);
 		}
+		$todolist.html(str);
 	};
 	//更新视图
 	createList();
