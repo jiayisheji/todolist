@@ -89,8 +89,13 @@ $(function(){
 		var completed = $todolist.find('li.completed').size();
 		$clearcompleted.html('<span>清除&nbsp;</span><strong>'+completed+'</strong><span>&nbsp;完成项目</span>');
 		$todocount.html('<strong>'+(todo - completed)+'</strong><span>&nbsp;剩下的项目</span>');
-		$toggleall.prop("checked", completed === todo);
-		saveData(todoData)
+		if(todo === 0 && completed === 0){
+			$toggleall.prop("checked", false);
+		}else{
+			$toggleall.prop("disabled", false);
+			$toggleall.prop("checked", completed === todo);
+		}
+		saveData(todoData);
 	}
 
 	//step7  清除选中的列表项
@@ -135,6 +140,7 @@ $(function(){
 			str += createData(todoData[i]);
 		}
 		$todolist.html(str);
+		todoCount();
 	};
 	//更新视图
 	createList();
