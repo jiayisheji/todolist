@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Todos</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+</head>
+<body>
+    <div class="todoapp" id="todoapp">
+        <header class="header" >
+            <h1 v-text="title"></h1>
+            <form class="todo-form" @submit.prevent="add">
+                <input class="add-todo" placeholder="请输入内容" v-model="content" required="required" autocomplete="off">
+                <button type="submit" class="add-btn">+</button>
+            </form>
+        </header>
+        <main class="main">
+            <input class="toggle-all" type="checkbox" @click="changeAllfn()" v-my-checked="toggleAll" v-my-disabled="disabled">
+            <ul class="todo-list" v-if="!!list.length">
+                <li v-for="data in list" :class="{'completed':data.done,'editing':data.edit}" @dblclick="edit(data.id)">
+                    <div class="view">
+                        <input class="toggle" @click="change($index)" type="checkbox"  v-my-checked="data.done" />
+                        <label v-text="data.title"></label>
+                        <button class="destroy" @click="remove($index)"></button>
+                    </div>
+                    <input class="edit" v-model="data.title" @blur="blur($index)">
+                </li>
+            </ul>
+        </main>
+        <footer class="footer">
+            <span class="todo-count">
+                <strong>{{count}}</strong>
+                <span>剩下的项目</span>
+            </span>
+            <button class="clear-completed" @click="clear()">
+                <span>清除</span>
+                <strong>{{completed}}</strong>
+                <span>完成项目</span>
+            </button>
+        </footer>
+    </div>
+    <script type="text/javascript" src="js/vue.min.js"></script>
+    <script type="text/javascript" src="js/todos.js"></script>
+</body>
+</html>
