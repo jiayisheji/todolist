@@ -70,14 +70,11 @@ angular.module('todoApp', []).
 		};
 		todoCount();
 		function todoCount(){    //统计函数
-			var iNum = 0;
-			angular.forEach($scope.Todo.list,function(v){
-				if(v.done){
-					iNum++;
-				}
+			var iNum = $scope.Todo.list.filter(function(v) {   //过滤选中的数据，保留选中的
+				return v.done;
 			});
-			$scope.Todo.completed = iNum;  //统计需要清除项目
-			$scope.Todo.count = $scope.Todo.list.length-iNum;  //统计剩下项目
+			$scope.Todo.completed = iNum.length;  //统计需要清除项目
+			$scope.Todo.count = $scope.Todo.list.length-iNum.length;  //统计剩下项目
 			$scope.Todo.disabled = !$scope.Todo.list.length; //如果没有项目全按钮不能点击
 			$scope.Todo.toggleAll = !!$scope.Todo.completed && $scope.Todo.list.length === $scope.Todo.completed;   //动态改变全选按钮选中状态
 			save($scope.Todo.list);   //保存数据到本地存储
